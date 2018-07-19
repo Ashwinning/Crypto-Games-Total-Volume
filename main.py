@@ -59,3 +59,15 @@ def SaveAllChartsAsJSON():
             file.write(json.dumps(chart, indent=4))
 
 #SaveAllChartsAsJSON()
+
+def TotalVolume(folder):
+    totalVolume = 0
+    files = os.listdir('Charts/{}/'.format(folder))
+    for file in files:
+        with open('Charts/{}/'.format(folder)+file, 'r') as f:
+            data = json.loads(f.read())
+            for object in data['data']:
+                totalVolume += object['volume']
+    return totalVolume
+
+print(TotalVolume('gambling'))
