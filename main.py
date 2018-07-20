@@ -70,4 +70,26 @@ def TotalVolume(folder):
                 totalVolume += object['volume']
     return totalVolume
 
-print(TotalVolume('gambling'))
+#print(TotalVolume('gambling'))
+
+
+dataPoints = {}
+
+def TotalVolumeOverTimeToCSV(folder):
+    files = os.listdir('Charts/{}/'.format(folder))
+    for file in files:
+        with open('Charts/{}/'.format(folder)+file, 'r') as f:
+            data = json.loads(f.read())
+            for dataPoint in data['data']:
+                if dataPoint['date'] in dataPoints.keys():
+                    dataPoints[dataPoint['date']]['dau'] += dataPoint['dau']
+                    dataPoints[dataPoint['date']]['volume'] += dataPoint['volume']
+                else:
+                    dataPoints[dataPoint['date']] = {'dau':dataPoint['dau'],'volume':dataPoint['volume']}
+
+TotalVolumeOverTimeToCSV('combined')
+
+with open('volume.csv','w') as f:
+    for date in dataPoints.keys():
+        f.write('date' + ',' + 'dau' + ',' + 'volume' + '\n')
+        f.write(str(date) + ',' + str(dataPoints[date]['dau']) + ',' + str(dataPoints[date]['volume']) + '\n')

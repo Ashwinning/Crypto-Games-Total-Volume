@@ -1,0 +1,21 @@
+{
+    "data": [
+        {
+            "volume": 0.025, 
+            "dau": 5, 
+            "date": "2018-07-17"
+        }, 
+        {
+            "volume": 0.0968, 
+            "dau": 8, 
+            "date": "2018-07-18"
+        }, 
+        {
+            "volume": 0, 
+            "dau": 2, 
+            "date": "2018-07-19"
+        }
+    ], 
+    "success": true, 
+    "error": null
+}
